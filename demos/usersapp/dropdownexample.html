@@ -12,6 +12,18 @@
     <select name="usersDropDownList" id="usersDropDownList">
         <option value="">Select...</option>
     </select>
+
+    <table id="usersTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
     <script>
 
         function fillUsersDropDownList(users) {
@@ -28,12 +40,24 @@
             }
         }
 
+        function fillUsersTable(users) {
+            const tbody = document.querySelector("#usersTable tbody");
+            for (const user of users) {
+                let row = tbody.insertRow(-1);
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                cell1.innerText = user.name;
+                cell2.innerText = user.email;
+            }
+        }
+
         function fetchUsers() {
             return fetch("https://jsonplaceholder.typicode.com/users").then(response => response.json());
         }
 
         function loadUsersDropDownList() {
             fetchUsers().then(fillUsersDropDownList);
+            fetchUsers().then(fillUsersTable);
         }
 
         window.onload = () => {
