@@ -13,11 +13,6 @@
         <option value="">Select...</option>
     </select>
     <script>
-        function loadUsersDropDownList() {
-            // fetch data from API
-            fetchUsers().then(fillUsersDropDownList);
-
-        }
 
         function fillUsersDropDownList(users) {
             const usersDropDownList = document.getElementById("usersDropDownList");
@@ -33,6 +28,18 @@
             }
         }
 
+        function fetchUsers() {
+            return fetch("https://jsonplaceholder.typicode.com/users").then(response => response.json());
+        }
+
+        function loadUsersDropDownList() {
+            fetchUsers().then(fillUsersDropDownList);
+        }
+
+        window.onload = () => {
+            loadUsersDropDownList();
+        }
+
         // function parseJSONToArrayOfObjects(response) {
         //     return response.json();
         // }
@@ -45,15 +52,6 @@
         //    let promiseThatReturnsArrayOfObjects = promise.then(parseJSONToArrayOfObjects);
         //    promiseThatReturnsArrayOfObjects.then(displayUsers);
         // }
-
-        function fetchUsers() {
-            return fetch("https://jsonplaceholder.typicode.com/users").then(response => response.json());
-        
-        }
-
-        window.onload = () => {
-            loadUsersDropDownList();
-        }
 
     </script>
 </body>
