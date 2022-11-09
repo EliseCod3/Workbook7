@@ -1,0 +1,10 @@
+* {
+    align-content: center;
+    text-align: center;
+}
+table {
+    border-style: solid;
+    border-color: black;
+    border-width: 0.5rem;
+    background-color:thistle;
+}
