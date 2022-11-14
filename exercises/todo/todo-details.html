@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css"> 
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Todo</title>
+</head>
+
+<body>
+    <h1>Todo</h1>
+    <label for="todo-Id">id</label>
+    <input type="text" id="todo-Id">
+    <button>Get</button>
+    <div id="Todo-card">
+        <span></span>
+        <p></p>
+    </div>
+
+    <script>
+        
+        window.onload = () => {
+            function onButtonClicked() {
+                const id = document.querySelector("#todo-Id").value;
+                loadTodo(id);
+            }
+
+            function loadTodo(todoId) {
+                const completedSpan = document.querySelector("#Todo-card span");
+                const titleParagraph = document.querySelector("#Todo-card p");
+
+                fetch(`http://localhost:8888/todos/${todoId}`).then(response => response.json()).then(data => {
+                    completedSpan.innerText = data.completed;
+                    titleParagraph.innerText = data.title;
+                })
+
+            }
+            
+            const button = document.querySelector("button");
+            button.onclick = onButtonClicked;
+        }
+    </script>
+</body>
+</html>
