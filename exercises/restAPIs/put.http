@@ -1,0 +1,12 @@
+GET http://localhost:8888/todos/1
+
+###put a resource information
+PUT http://localhost:8888/todos/1
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "id": 1,
+  "title": "Jamie A.",
+  "completed": true
+}
