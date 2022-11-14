@@ -1,0 +1,11 @@
+Get http://localhost:8888/todos/
+
+###post a new resorce
+POST http://localhost:8888/todos/
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "title": "PuppyCat",
+    "completed": true
+}
