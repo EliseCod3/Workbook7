@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">    <link rel="stylesheet" href="./css/styles.css">
+    <title>New Todo</title>
+</head>
+
+<body>
+    <main>
+        <form>
+            <input type="checkbox" name="completedCheckbox" id="completedCheckbox">
+            <label for="completedCheckbox">Completed?</label>
+            <label for="title-input">Task</label>
+            <input type="text" name="task" id="title-input">
+            <button type="submit">Save</button>
+            <p id="messageParagraph"></p>
+        </form>
+    </main>
+    
+    <script>
+        (function () {
+            const $q = (selector) => document.querySelector(selector);
+            const completedCheckbox = $q("#completedCheckbox");
+            const titleInput = $q("#title-input");
+            const saveButton = $q("button");
+            const form = $q("form");
+            const messageParagraph = $q("#messageParagraph");
+
+            function saveTodo(event) {
+                event.preventDefault();
+
+                const bodyData = {
+                    userId: 1,
+                    title: titleInput.value,
+                    completed: completedCheckbox.checked,
+                }
+
+                fetch("http://localhost:8888/todos/", { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json"},
+                    body: JSON.stringify(bodyData)
+                }).then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    messageParagraph.innerText = "Successfully saved."
+                })
+                .catch(error => {
+                    console.log(error);
+                    messageParagraph.innerText = "An unexpected error occured.";
+                });
+
+        
+            }
+
+            window.onload = function () {
+                form.onsubmit = saveTodo;
+            }
+
+            // let bodyData = {
+
+            // } 
+
+            // fetch("http://localhost:8888/todos/2", {
+            //     method: "POST", body: JSON.stringify(bodyData),
+            //     headers: { "Content-type": "application/json; charset=UTF-8" }
+            // }).then(response => response.json()).then(todo => {
+
+            // }).catch(err => {
+            // });
+
+        })()
+    </script>
+
+</body>
+
+</html>
