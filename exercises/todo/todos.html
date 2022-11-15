@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
+    <title>Todos</title>
+</head>
+<body>
+    
+    <main>
+        <h1>Todo List</h1>
+        <a href="./new-todo.html"> &plus; </a>
+        <table id="todos-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+
+    </main>
+
+    <script>
+        (() => {
+            const $q = (s) => document.querySelector(s);
+
+            const tbody = $q("#todos-table tbody");
+
+            function loadData() {
+                return fetch("http://localhost:8888/todos/").then(response => response.json())
+            }
+
+            function createEditLink(todo) {
+                const a = document.createElement("a");
+                a.href = "./edit-todo.html?id=" + todo.id;
+                a.innerText = "Edit";
+                return a;
+            }
+
+            function fillTable(todos) {
+                for (const todo of todos) {
+                    let row = tbody.insertRow(-1);
+                    let cell2 = row.insertCell(0);
+                    let cell1 = row.insertCell(1);
+                    let cell3 = row.insertCell(2);
+                    cell1.innerHTML = todo.completed ? "&#10003;": null;
+                    cell2.innerText = todo.title
+                    const a = createEditLink(todo);
+                    cell3.appendChild(a);
+                }
+            }
+
+            window.onload = () => {
+                loadData().then(data => fillTable(data))
+            }
+        })()
+    </script>
+</body>
+</html>

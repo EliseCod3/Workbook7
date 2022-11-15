@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">    <link rel="stylesheet" href="./css/styles.css">
-    <title>New Todo</title>
+    <title>Edit Todo</title>
 </head>
 
 <body>
     <main>
-        <h1>Add</h1>
+        <h2>Edit</h2>
         <form>
             <input type="checkbox" name="completedCheckbox" id="completedCheckbox">
             <label for="completedCheckbox">Completed?</label>
@@ -33,14 +33,16 @@
             function saveTodo(event) {
                 event.preventDefault();
 
+                const id = getTodoId();
+
                 const bodyData = {
                     userId: 1,
                     title: titleInput.value,
                     completed: completedCheckbox.checked,
                 }
 
-                fetch("http://localhost:8888/todos/", { 
-                    method: "POST",
+                fetch("http://localhost:8888/todos/" + id, { 
+                    method: "PUT",
                     headers: { "Content-Type": "application/json"},
                     body: JSON.stringify(bodyData)
                 }).then(response => response.json())
@@ -57,7 +59,22 @@
         
             }
 
+            function loadTodo(todoId) {
+                fetch(`http://localhost:8888/todos/${todoId}`).then(response => response.json()).then(todo => {
+                    console.log(todo)
+                    completedCheckbox.checked = todo.completed;
+                    titleInput.value = todo.title
+                })
+
+            }
+
+            function getTodoId() {
+                const params = new URLSearchParams(location.search);
+                return params.get("id");
+            }
+
             window.onload = function () {
+                loadTodo(getTodoId());
                 form.onsubmit = saveTodo;
             }
 
