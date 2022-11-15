@@ -16,7 +16,8 @@
             <label for="completedCheckbox">Completed?</label>
             <label for="title-input">Task</label>
             <input type="text" name="task" id="title-input">
-            <button type="submit">Save</button>
+            <button type="submit" id="saveBtn">Save</button>
+            <button type="button" id="cancelBtn">Cancel</button>
             <p id="messageParagraph"></p>
         </form>
     </main>
@@ -26,9 +27,10 @@
             const $q = (selector) => document.querySelector(selector);
             const completedCheckbox = $q("#completedCheckbox");
             const titleInput = $q("#title-input");
-            const saveButton = $q("button");
+            const saveButton = document.getElementById("saveBtn");
             const form = $q("form");
             const messageParagraph = $q("#messageParagraph");
+            const cancelBtn = document.getElementById("cancelBtn");
 
             function saveTodo(event) {
                 event.preventDefault();
@@ -73,22 +75,15 @@
                 return params.get("id");
             }
 
-            window.onload = function () {
-                loadTodo(getTodoId());
-                form.onsubmit = saveTodo;
+            function cancelEdit() {
+                window.location = "./todos.html"
             }
 
-            // let bodyData = {
-
-            // } 
-
-            // fetch("http://localhost:8888/todos/2", {
-            //     method: "POST", body: JSON.stringify(bodyData),
-            //     headers: { "Content-type": "application/json; charset=UTF-8" }
-            // }).then(response => response.json()).then(todo => {
-
-            // }).catch(err => {
-            // });
+            window.onload = function () {
+                loadTodo(getTodoId());
+                cancelBtn.onclick = cancelEdit;
+                form.onsubmit = saveTodo;
+            }
 
         })()
     </script>
