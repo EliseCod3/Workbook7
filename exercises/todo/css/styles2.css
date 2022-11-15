@@ -1,0 +1,9 @@
+table {
+    margin-top: 1rem;
+}
+#add-todo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 3rem;
+}
