@@ -33,7 +33,7 @@
             function saveTodo(event) {
                 event.preventDefault();
 
-                const bodyData = {
+                const todoData = {
                     userId: 1,
                     title: titleInput.value,
                     completed: completedCheckbox.checked,
@@ -42,7 +42,7 @@
                 fetch("http://localhost:8888/todos/", { 
                     method: "POST",
                     headers: { "Content-Type": "application/json"},
-                    body: JSON.stringify(bodyData)
+                    body: JSON.stringify(todoData)
                 }).then(response => response.json())
                 .then(data => {
                     console.log(data)
