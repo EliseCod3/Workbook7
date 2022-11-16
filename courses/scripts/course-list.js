@@ -3,7 +3,7 @@
 const courseTableBody = document.querySelector("#courseTable tbody");
 
 function loadCourseTableBody() {
-  fetch("http://localhost:8082/api/courses")
+  fetch("http://localhost:8888/courses")
     .then((response) => response.json())
     .then((courses) => {
       courses.forEach((course) => {
