@@ -8,6 +8,7 @@ const courseInstrutorInput = $q("#course-instructor-input");
 const startDateInput = $q("#course-startdate-input");
 const numDaysInput = $q("#numDays-input");
 const messageParagraph = $q("#messageParagraph");
+const cancelAdd = document.getElementById("cancel-add")
 
 function saveCourse(event) {
     event.preventDefault();
@@ -35,8 +36,12 @@ function saveCourse(event) {
         messageParagraph.innerText = "An unexpected error occured.";
     })
 }
+function cancelAddingCourse() {
+    window.location = "./courses.html"
+}
 
 window.onload = function() {
     const form = $q("form");
     form.onsubmit = saveCourse;
+    cancelAdd.onclick = cancelAddingCourse
 }
