@@ -49,10 +49,35 @@
   function displayMessage() {
     if(sessionStorage.savedMessage){
       updateMessageDisplay.innerText = sessionStorage.savedMessage;
+    }else if (sessionStorage.changedMessage) {
+      updateMessageDisplay.innerText = sessionStorage.changedMessage;
+    }
+
+    if(sessionStorage.deleteMessage) {
+      updateMessageDisplay.innerText = sessionStorage.deleteMessage;
     }
   }
+
+  function removeMessage() {
+    if(sessionStorage.savedMessage){
+      updateMessageDisplay.innerText = "";
+      sessionStorage.removeItem("message");
+      sessionStorage.savedMessage = "";
+    }else if (sessionStorage.changedMessage) {
+      updateMessageDisplay.innerText = "";
+      sessionStorage.removeItem("message");
+      sessionStorage.changedMessage = "";
+    }
+
+    if(sessionStorage.deleteMessage) {
+      updateMessageDisplay.innerText = "";
+      sessionStorage.removeItem("message");
+      sessionStorage.deleteMessage = "";
+    }
+}
   
   window.onload = () => {
     loadCourseTableBody();
     displayMessage();
+    setTimeout(removeMessage, 5000)
   };

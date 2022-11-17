@@ -31,6 +31,7 @@ function saveEditedCourse(event) {
     }).then(response => response.json())
     .then(data => {
         console.log(data)
+        sessionStorage.changedMessage = "Changes have successfully been saved."
         window.location = "./courses.html";
     })
     .catch(error => {
@@ -57,6 +58,7 @@ function getCourseId() {
 }
 
 function cancelEdit() {
+    sessionStorage.changedMessage = "No changes have been made."
     window.location = "./courses.html"
 }
 

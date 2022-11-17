@@ -15,6 +15,7 @@ function deleteCourse(event) {
     fetch("http://localhost:8888/courses/" + id, {
         method: "DELETE",
     }).then(() => {
+        sessionStorage.deleteMessage = "Course has permantly been removed."
         window.location = "./courses.html";
     })
     .catch(error => {
@@ -39,6 +40,7 @@ function getCourseId() {
 }
 
 function cancelDelete() {
+    sessionStorage.deleteMessage = "No course was removed."
     window.location = "./courses.html"
 }
 

@@ -38,6 +38,7 @@ function saveCourse(event) {
     })
 }
 function cancelAddingCourse() {
+    sessionStorage.savedMessage = "No course Added."
     window.location = "./courses.html"
 }
 
