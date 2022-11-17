@@ -46,7 +46,7 @@ function loadCourse(courseId) {
         courseNameInput.value = course.courseName;
         courseNumberInput.value = course.courseNum;
         courseDeptInput.value = course.dept;
-        courseInstrutorInput.value = course.instructor;
+        courseInstrutorInput.value = course.instuctor;
         startDateInput.value = course.startDate;
         numDaysInput.value = course.numDays;
     })
