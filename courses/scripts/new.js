@@ -29,6 +29,7 @@ function saveCourse(event) {
     }).then(response => response.json())
     .then(data => {
         console.log(data)
+        sessionStorage.savedMessage = "New course has been Added."
         window.location = "./courses.html";
     })
     .catch(error => {

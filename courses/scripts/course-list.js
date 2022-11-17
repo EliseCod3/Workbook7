@@ -16,6 +16,7 @@
   }
   
   const courseTableBody = document.querySelector("#courseTable tbody");
+  const updateMessageDisplay = document.getElementById("update-message");
   
   function loadCourseTableBody() {
     fetch("http://localhost:8888/courses")
@@ -44,7 +45,14 @@
         });
       });
   }
+
+  function displayMessage() {
+    if(sessionStorage.savedMessage){
+      updateMessageDisplay.innerText = sessionStorage.savedMessage;
+    }
+  }
   
   window.onload = () => {
     loadCourseTableBody();
+    displayMessage();
   };
